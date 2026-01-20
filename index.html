@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SMART ALERT - Live</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>body{background:url('/static/bg.jpg') center/cover no-repeat fixed}</style>
+</head>
+<body>
+  <header>
+    <div class="left">SMART ALERT</div>
+    <div class="right">
+    <button class="top-btn" id="profileBtn" onclick="location.href='/profile'">Profile</button>
+      <!-- History button navigates to full page -->
+      <button class="top-btn" id="historyBtn" onclick="location.href='/history_page'">History</button>
+    </div>
+  </header>
+
+  <main style="display:flex;flex-direction:column;align-items:center;padding:18px 20px">
+    <div class="video-wrap">
+      <video id="video" autoplay playsinline></video>
+      <canvas id="overlay" class="video-overlay"></canvas>
+    </div>
+
+    <div style="margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:6px">
+      <div id="statusBox" class="status-box">STATUS: SAFE</div>
+      <div id="metaBox" class="meta-box">Location: <span id="locText">THALAVAPALAYAM</span> • <span id="dateTime">--</span></div>
+      <div style="margin-top:6px">
+        <button id="detectBtn" class="top-btn">Detection: ON</button>
+      </div>
+      <div id="netStatus" class="net-status">&nbsp;</div>
+    </div>
+  </main>
+
+  <!-- History modal -->
+  <div id="historyModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Alert history</h3>
+      <div id="historyList" class="history-list"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART ALERT - How It Works</title><style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: url('/static/bg.jpg') center/cover no-repeat fixed;
+    height: 100vh;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeInBody 0.9s ease-in-out forwards;
+}
+
+@keyframes fadeInBody {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.10);
+    pointer-events: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background: #000;
+    opacity: 0;
+    animation: fadeInHeader 1s ease-in-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInHeader {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+header nav {
+    display: flex;
+    gap: 14px;
+    margin-right: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #fff;
+    border: 1px solid white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: .3s;
+    opacity: 0;
+    animation: fadeInNav 1s ease-in-out forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInNav {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+header nav a:hover {
+    background: white;
+    color: black;
+}
+
+.container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: 750px;
+    background: rgba(255,255,255,0.95);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInCard 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.step {
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInSteps 0.8s ease forwards;
+}
+
+.step:nth-child(1) { animation-delay: 0.8s; }
+.step:nth-child(2) { animation-delay: 1.0s; }
+.step:nth-child(3) { animation-delay: 1.2s; }
+.step:nth-child(4) { animation-delay: 1.4s; }
+.step:nth-child(5) { animation-delay: 1.6s; }
+.step:nth-child(6) { animation-delay: 1.8s; }
+
+@keyframes fadeInSteps {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #007bff;
+}
+
+.step p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Fade-out transition */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+</style></head><body><header>
+    <div class="logo">SMART ALERT</div>
+    <nav id="navLinks" style="margin-right:36px;">
+        <a href="/main.html">Home</a>
+        <a href="/how_it_works.html">How it Works</a>
+        <a href="/guidelines.html">Guidelines</a>
+    </nav>
+</header><div class="container">
+    <div class="card">
+        <h2>How SMART ALERT Works</h2><div class="step">
+    <h3>1. Real-Time Emergency Detection</h3>
+    <p>The system uses AI models to detect emergencies directly from live camera feeds. It identifies situations such as <strong>accidents, fire outbreaks, explosions, and robbery attempts</strong> instantly without human input.</p>
+</div><div class="step">
+    <h3>2. Automatic Alert Classification</h3>
+    <p>After detecting an incident, the system automatically identifies the type of emergency. For example:
+        <br>• Fire → Fire Department
+        <br>• Accident → Ambulance & Police
+        <br>• Robbery → Police
+        <br>• Explosion → Fire, Police & Medical Teams
+    </p>
+</div><div class="step">
+    <h3>3. Instant Notification to Authorities</h3>
+    <p>Once the emergency type is confirmed, SMART ALERT sends an instant alert notification directly to the required authorities with:
+        <br>• Location details
+        <br>• Camera ID
+        <br>• Snapshot of the incident
+        <br>• Severity level
+    </p>
+</div><div class="step">
+    <h3>4. Public Camera Monitoring (Government Users)</h3>
+    <p>Government officials can monitor public area cameras such as traffic CCTVs, street cameras, and city surveillance networks. They can:
+        <br>• View real-time alerts
+        <br>• Monitor multiple locations
+        <br>• Dispatch emergency teams instantly
+        <br>• Access historical alerts for investigation
+    </p>
+</div><div class="step">
+    <h3>5. Home Surveillance Control (Citizen Users)</h3>
+    <p>Home users can link their private CCTV cameras. In case of fire, break-ins, or suspicious activity, alerts are sent directly to the homeowner. They can:
+        <br>• View their live camera feed
+        <br>• Get instant alerts on their phone
+        <br>• Contact police or fire services from the app
+    </p>
+</div><div class="step">
+    <h3>6. Advantages of SMART ALERT</h3>
+    <p>
+        • Extremely fast emergency detection and response<br>
+        • Reduces loss of life and property<br>
+        • Works with both public and private cameras<br>
+        • Eliminates manual monitoring<br>
+        • AI ensures high accuracy during detection<br>
+        • Helps police and emergency teams act faster
+    </p>
+</div>
+</div><script>
+// Apply fade-in when page loads
+window.onload = () => {
+    document.body.style.opacity = 1;
+};
+
+// Add fade-out effect for header nav links only
+document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.href;
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = url; }, 350);
+    });
+});
+</script></body>
+</html>

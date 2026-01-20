@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART ALERT - Sign Up</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: url('/static/bg.jpg') center/cover no-repeat fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeInBody 0.45s ease-in-out forwards;
+}
+
+@keyframes fadeInBody {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.10);
+    pointer-events: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background: #000;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid white;
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+
+header nav a:hover {
+    background: white;
+    color: black;
+}
+
+.container {
+    padding-top: 120px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 500px;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #007bff, #00c0ff);
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.govt-fields, .citizen-fields {
+    display: none;
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-link a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SMART ALERT</div>
+    <nav style="margin-right:36px;">
+        <a href="/main.html">Home</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Create Account</h2>
+
+        <form action="/signup" method="post">
+
+        <label>User Type</label>
+        <select id="userType" name="userType">
+            <option value="Citizen" selected>Citizen</option>
+            <option value="Govt">Government Official</option>
+        </select>
+
+        <label>Full Name</label>
+        <input type="text" name="fullName" placeholder="Enter Full Name">
+
+        <label>Mobile Number</label>
+        <input type="text" name="mobile" placeholder="Enter Mobile Number">
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter Email">
+
+        <label>Camera IP Address</label>
+        <input type="text" name="camera_ip" placeholder="Enter Camera IP">
+
+        <!-- Citizen Fields -->
+        <div class="citizen-fields">
+            <label>Police Number</label>
+            <input type="text" name="police_number" placeholder="Enter Police Number">
+
+            <label>Fire Engine Number</label>
+            <input type="text" name="fire_number" placeholder="Enter Fire Engine Number">
+
+            <label>Ambulance Number</label>
+            <input type="text" name="ambulance_number" placeholder="Enter Ambulance Number">
+
+            <label>Alert Email (Receive Camera Photos)</label>
+            <input type="email" name="alert_email" placeholder="Enter Alert Email">
+        </div>
+
+        <!-- Govt Fields -->
+        <div class="govt-fields">
+            <label>Department</label>
+            <input type="text" name="department" placeholder="Enter Department">
+
+            <label>Designation</label>
+            <input type="text" name="designation" placeholder="Enter Designation">
+
+            <label>Employee ID</label>
+            <input type="text" name="employee_id" placeholder="Enter Employee ID">
+
+            <label>Official Phone</label>
+            <input type="text" name="official_phone" placeholder="Enter Official Phone">
+
+            <label>Official Email</label>
+            <input type="email" name="official_email" placeholder="Enter Official Email">
+
+            <label>Office Address</label>
+            <input type="text" name="office_address" placeholder="Enter Office Address">
+        </div>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter Password">
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password" placeholder="Confirm Password">
+
+        <button type="submit">Register</button>
+
+    </form>
+
+        <div class="login-link">
+            Already have an account? <a href="/login">Login</a>
+        </div>
+    </div>
+</div>
+
+<script>
+const userType = document.getElementById("userType");
+const citizenFields = document.querySelector(".citizen-fields");
+const govtFields = document.querySelector(".govt-fields");
+
+userType.addEventListener("change", () => {
+    if(userType.value === "Citizen") {
+        citizenFields.style.display = "block";
+        govtFields.style.display = "none";
+    } else if(userType.value === "Govt") {
+        citizenFields.style.display = "none";
+        govtFields.style.display = "block";
+    }
+});
+
+// Show Citizen fields by default
+window.onload = () => {
+    document.body.style.opacity = 1;
+    if(userType.value === "Citizen") {
+        citizenFields.style.display = "block";
+    }
+};
+</script>
+
+</body>
+</html>

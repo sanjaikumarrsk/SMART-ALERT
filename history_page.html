@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SMART ALERT - History</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>body{background:url('/static/bg.jpg') center/cover no-repeat fixed}</style>
+</head>
+<body>
+  <header>
+    <div class="left">SMART ALERT</div>
+    <div class="right">
+      <button class="top-btn" onclick="location.href='/index.html'">Live</button>
+      <button class="top-btn" id="downloadAll">Download</button>
+    </div>
+  </header>
+
+  <main style="padding:20px;">
+    <h2 style="color:#fff;margin:6px 0 18px">Alert History</h2>
+    <div id="historyContainer" class="history-container"></div>
+  </main>
+
+  <script>
+  async function renderHistory(){
+    const c = document.getElementById('historyContainer');
+    c.innerHTML = 'Loading...';
+    try{
+      const res = await fetch('/history');
+      const arr = await res.json();
+      if(!arr || arr.length===0){ c.innerHTML = '<div style="color:#fff">No history</div>'; return; }
+      c.innerHTML = '';
+      arr.forEach(it => {
+        const row = document.createElement('div');
+        row.className = 'history-row';
+
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'history-img-wrap';
+        const img = document.createElement('img');
+        img.src = it.path || ('data:image/jpeg;base64,' + (it.image_b64||''));
+        img.className = 'history-img';
+        imgWrap.appendChild(img);
+
+        const details = document.createElement('div');
+        details.className = 'history-details';
+        details.innerHTML = `
+          <div><strong>Task:</strong> ${it.task}</div>
+          <div><strong>Level:</strong> ${it.level||'n/a'}</div>
+          <div><strong>Confidence:</strong> ${Math.round((it.confidence||0)*100)}%</div>
+          <div><strong>Location:</strong> ${it.location||''}</div>
+          <div><strong>Time:</strong> ${it.time||''}</div>
+          <div style="margin-top:8px"><a href="${it.path||''}" target="_blank">Open image</a></div>
+        `;
+
+        // Per-record download button
+        const dlBtn = document.createElement('button');
+        dlBtn.className = 'top-btn';
+        dlBtn.style.marginTop = '8px';
+        dlBtn.textContent = 'Download';
+        dlBtn.addEventListener('click', () => {
+          const name = encodeURIComponent(it.name || '');
+          if (!name) {
+            alert('No image available for download');
+            return;
+          }
+          window.location.href = '/history/download_record?name=' + name;
+        });
+        details.appendChild(dlBtn);
+
+        row.appendChild(imgWrap);
+        row.appendChild(details);
+        c.appendChild(row);
+      });
+    }catch(e){ c.innerHTML = '<div style="color:#fff">Failed to load history</div>'; }
+  }
+
+  document.getElementById('downloadAll').addEventListener('click', async ()=>{
+    // trigger server ZIP download
+    window.location.href = '/history/download';
+  });
+
+  renderHistory();
+  </script>
+</body>
+</html>
